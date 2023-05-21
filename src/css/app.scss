@@ -1,0 +1,11 @@
+// app global css in SCSS form
+
+@import "./reset.scss";
+
+.editable{
+  background: var(--nord5);
+  align-items: baseline;
+  border: 1px solid grey;
+  border-radius: 5px;
+
+}
