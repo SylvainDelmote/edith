@@ -2,6 +2,8 @@
 // IMPORT
 import { ref } from 'vue'
 
+const emit = defineEmits(['exportIt', 'newDoc'])
+
 // PROPS & EMITS
 
 const MenuIsOpen = ref(false)
@@ -12,7 +14,7 @@ const MenuIsOpen = ref(false)
 <q-bar class="bg-dark">
 
   <q-avatar class="gt-sm" rounded color="primary" size="md" text-color="white" icon="directions" />
-  <q-header-title class="gt-sm text-weight-bold"> Edith </q-header-title>
+  <span class="gt-sm text-weight-bold"> Edith </span>
 
     <!-- Mobile  -->
     <q-btn  flat  class="lt-md" icon="menu" @click="()=> MenuIsOpen = !MenuIsOpen" />
@@ -25,8 +27,8 @@ const MenuIsOpen = ref(false)
     <q-btn flat no-caps size="14px"   color="white" label="Fichier">
         <q-menu>
           <q-list style="min-width: 100px">
-            <q-item clickable v-close-popup>
-              <q-item-section>Nouveau document </q-item-section>
+            <q-item clickable v-close-popup @click="()=>emit('newDoc')"   >
+              <q-item-section>Nouveau document  </q-item-section>
             </q-item>
             <q-item clickable v-close-popup>
               <q-item-section> Importer un modele  </q-item-section>
@@ -40,7 +42,7 @@ const MenuIsOpen = ref(false)
               <q-item-section>Sauvegarder en local</q-item-section>
             </q-item>
             <q-separator />
-            <q-item clickable v-close-popup>
+            <q-item clickable v-close-popup @click="()=>emit('exportIt') ">
               <q-item-section>Exporter</q-item-section>
             </q-item>
           </q-list>

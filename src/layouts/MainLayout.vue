@@ -41,6 +41,21 @@ function lockIt () {
   documentIsLocked.value = !documentIsLocked.value
 }
 
+function exportIt () {
+  const content = editorRef.value.getContentEl()
+  navigator.clipboard.writeText(content.innerHTML)
+  $q.notify({
+    message: 'Contenu copié dans le presse papier',
+    color: 'positive',
+    textColor: 'white',
+    icon: 'content_copy'
+  })
+}
+
+function newDocument () {
+  editor.value = null
+}
+
 function saveIt () {
   $q.notify({
     message: 'Sauvegarde faite en locale (en fait non)',
@@ -62,6 +77,48 @@ function toggleFullScreen () {
 
 function toggleRedAlert () {
   redAlertIsActive.value = !redAlertIsActive.value
+}
+
+function displayIt () {
+  const contenu = editorRef.value.getContentEl()
+
+  const afficherEnA4 = () => {
+    const contenuValue = contenu.value
+    const aperçuWindow = window.open('', '_blank')
+    const aperçuDocument = aperçuWindow.document
+
+    const aperçuHTML = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Aperçu A4</title>
+        <style>
+          @page {
+            size: A4;
+            margin: 0;
+          }
+          html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+          }
+          .contenu {
+            padding: 20px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="contenu">${contenuValue}</div>
+      </body>
+    </html>
+  `
+
+    aperçuDocument.open()
+    aperçuDocument.write(aperçuHTML)
+    aperçuDocument.close()
+  }
+  afficherEnA4()
 }
 
 function onPaste (evt) {
@@ -95,18 +152,24 @@ onMounted(() => {
 <template>
 <q-layout view="hHh lpr lfr">
 
-<!----- TOP BARRE TYPE PC/SMARTPHONE ------------>
+ <!----- HEADER avec 2 BARRES  ------------>
+
   <q-header elevated >
-    <TopBar
-    @green = "toggleTopScreen"
-    @yellow="toggleFullScreen"
-    @red ="toggleRedAlert"
+    <!----- TOP BARRE TYPE MAC IOS  ------------>
+      <TopBar
+      @green = "toggleTopScreen"
+      @yellow="toggleFullScreen"
+      @red ="toggleRedAlert"
+      />
+  <!-- ---------------------------------------- -->
+
+<!-----  BARRE DE MENU  ------------>
+    <MenuBar
+    @exportIt = "exportIt"
+    @newDoc = "newDocument"
     />
-
-    <MenuBar />
-
-  </q-header>
 <!-- ---------------------------------------- -->
+  </q-header>
 
 <!-------------- EDITOR  ---------------------->
   <q-page-container class="q-ma-xl" >
@@ -118,7 +181,6 @@ onMounted(() => {
         :content-style=" {minWidth:'300px',  width: '80vw' }"
         placeholder="Votre prochain projet commence ici"
         @paste="onPaste"
-        :fullscreen= fullScreenIsEnabled
         :readonly= documentIsLocked
         :class="documentIsLocked ? 'bg-main' : 'bg-secondary'"
         :toolbar-rounded =" true"
@@ -197,6 +259,7 @@ onMounted(() => {
       @addIt="addIt"
       @saveIt="saveIt"
       @lineIt = "lineIt"
+      @displayIt = "displayIt"
       :documentIsLocked=documentIsLocked
     />
   </q-toolbar>

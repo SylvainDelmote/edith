@@ -7,7 +7,7 @@ const props = defineProps({
     type: Boolean
   }
 })
-const emit = defineEmits(['lockIt', 'addIt', 'saveIt', 'lineIt'])
+const emit = defineEmits(['lockIt', 'addIt', 'saveIt', 'lineIt', 'displayIt'])
 
 // VARIABLES
 const couleur = 'primary'
@@ -48,8 +48,10 @@ const couleur = 'primary'
       :color=couleur
       icon="visibility"
       :disable= props.documentIsLocked
+      @click= "() => emit('displayIt')"
+
       >
-      <q-tooltip class="text-body2">I'm a tooltip</q-tooltip>
+      <q-tooltip class="text-body2"> Apercu </q-tooltip>
     </q-btn>
 
         <!-- SaveIt  -->

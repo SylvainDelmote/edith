@@ -24,7 +24,7 @@ const emit = defineEmits(['red', 'yellow', 'green'])
 
     <q-btn dense flat icon= "sunny" />
 
-    <div style="cursor: pointer;">{{heure}}</div>
+    <div style="cursor: pointer;"></div>
 
     <q-btn dense flat icon="search" />
 
