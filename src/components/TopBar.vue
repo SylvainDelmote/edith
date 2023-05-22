@@ -3,7 +3,7 @@ const emit = defineEmits(['red', 'yellow', 'green'])
 </script>
 
 <template>
-<q-bar>
+<q-bar class="bg-dark">
     <div> <!-- IOS Control Btns -->
         <!-- RED -->
         <q-btn @click= "() => emit('red')" dense flat round icon="lens" size="8.5px" color="negative">
@@ -21,12 +21,6 @@ const emit = defineEmits(['red', 'yellow', 'green'])
     </div>
 
     <q-space />
-
-    <q-btn dense flat icon= "sunny" />
-
-    <div style="cursor: pointer;"></div>
-
-    <q-btn dense flat icon="search" />
 
   </q-bar>
 </template>

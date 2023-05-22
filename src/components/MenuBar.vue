@@ -11,9 +11,9 @@ const MenuIsOpen = ref(false)
 </script>
 
 <template>
-<q-bar class="bg-dark">
+<q-bar>
 
-  <q-avatar class="gt-sm" rounded color="primary" size="md" text-color="white" icon="directions" />
+  <q-avatar class="gt-sm" rounded  size="md" text-color="white" icon="directions" />
   <span class="gt-sm text-weight-bold"> Edith </span>
 
     <!-- Mobile  -->
@@ -147,7 +147,13 @@ const MenuIsOpen = ref(false)
         </q-menu>
       </q-btn>
 
-    <q-space />
+          <q-space />
+
+      <div>
+        <q-btn dense flat icon= "wifi" />
+        <q-btn dense flat icon= "sunny" />
+        <q-btn dense flat icon="search" />
+      </div>
 
 </q-bar>
 </template>

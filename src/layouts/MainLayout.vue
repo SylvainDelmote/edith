@@ -153,15 +153,7 @@ onMounted(() => {
 <q-layout view="hHh lpr lfr">
 
  <!----- HEADER avec 2 BARRES  ------------>
-
   <q-header elevated >
-    <!----- TOP BARRE TYPE MAC IOS  ------------>
-      <TopBar
-      @green = "toggleTopScreen"
-      @yellow="toggleFullScreen"
-      @red ="toggleRedAlert"
-      />
-  <!-- ---------------------------------------- -->
 
 <!-----  BARRE DE MENU  ------------>
     <MenuBar
@@ -169,6 +161,14 @@ onMounted(() => {
     @newDoc = "newDocument"
     />
 <!-- ---------------------------------------- -->
+
+    <!----- TOP BARRE TYPE MAC IOS  ------------>
+      <TopBar
+      @green = "toggleTopScreen"
+      @yellow="toggleFullScreen"
+      @red ="toggleRedAlert"
+      />
+  <!-- ---------------------------------------- -->
   </q-header>
 
 <!-------------- EDITOR  ---------------------->
